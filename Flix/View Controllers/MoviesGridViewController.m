@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSArray *movies;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +28,11 @@
     self.collectionView.delegate = self;
     
     [self collectionView];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.tintColor = [UIColor grayColor];
+    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
     
     [self fetchMovies];
     
@@ -47,7 +53,6 @@
 
 // could provide a function with parameters
 - (void)fetchMovies {
-    
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/upcoming?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -75,7 +80,7 @@
             //               [self.tableView reloadData];
             
         }
-        //        [self.refreshControl endRefreshing];
+                [self.refreshControl endRefreshing];
     }];
     [task resume];
 }
