@@ -47,6 +47,7 @@
 
 // could provide a function with parameters
 - (void)fetchMovies {
+    
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/upcoming?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -106,6 +107,11 @@
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL: posterURL];
+    cell.posterView.alpha = 0;
+    [UIView animateWithDuration:1.5 animations:^{
+    cell.posterView.alpha = 1.0;
+           }];
+    
     
     return cell;
 }

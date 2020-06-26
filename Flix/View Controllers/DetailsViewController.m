@@ -7,6 +7,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface DetailsViewController ()
@@ -32,6 +33,9 @@
     [self.posterView setImageWithURL:posterURL];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
+    if (backdropURLString == (id) [NSNull null]) {
+        backdropURLString = posterURLString;
+    }
     NSString *fullBackdropURLString = [baseURLString stringByAppendingString:backdropURLString];
     
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];

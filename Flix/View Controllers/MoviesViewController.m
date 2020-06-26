@@ -95,6 +95,11 @@
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL: posterURL];
+    cell.posterView.alpha = 0;
+    [UIView animateWithDuration:1.5 animations:^{
+        cell.posterView.alpha = 1.0;
+               }];
+    
     
     
     
