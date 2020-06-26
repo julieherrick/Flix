@@ -31,6 +31,10 @@
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     [self.posterView setImageWithURL:posterURL];
+    self.posterView.alpha = 0;
+    [UIView animateWithDuration:.3 animations:^{
+    self.posterView.alpha = 1.0;
+           }];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
     if (backdropURLString == (id) [NSNull null]) {
@@ -40,6 +44,10 @@
     
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];
     [self.backdropView setImageWithURL:backdropURL];
+    self.backdropView.alpha = 0;
+    [UIView animateWithDuration: .9 animations:^{
+    self.backdropView.alpha = 1.0;
+           }];
     
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"overview"];
