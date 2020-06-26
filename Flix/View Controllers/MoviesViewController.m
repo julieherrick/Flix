@@ -39,7 +39,9 @@
 }
 
 - (void)fetchMovies {
+    
     [self.activityIndicator startAnimating];
+    
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -47,6 +49,7 @@
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
             
+            // could refactor into separate function
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies" message:@"The internet connection appears to be offline" preferredStyle:(UIAlertControllerStyleAlert)];
             
             // create a try again action

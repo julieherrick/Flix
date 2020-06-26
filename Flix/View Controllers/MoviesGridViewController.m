@@ -8,6 +8,7 @@
 
 #import "MoviesGridViewController.h"
 #import "MovieCollectionCell.h"
+#import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -44,6 +45,7 @@
     NSLog(@"Selected cell number: %ld", (long)indexPath.row);
 }
 
+// could provide a function with parameters
 - (void)fetchMovies {
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/upcoming?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
@@ -77,15 +79,21 @@
     [task resume];
 }
 
-/*
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+     UICollectionViewCell *tappedCell = sender;
+     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+     NSDictionary *movie = self.movies[indexPath.row];
+     DetailsViewController *detailsViewController = [segue destinationViewController];
+     detailsViewController.movie = movie;
+     
+     NSLog(@"Tapping on a movie!");
  }
- */
+
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
