@@ -26,28 +26,93 @@
     // Do any additional setup after loading the view.
     
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
+    NSString *baseURLStringSmall = @"https://image.tmdb.org/t/p/w200";
     NSString *posterURLString = self.movie[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+    NSString *fullPosterURLStringSmall = [baseURLStringSmall stringByAppendingString:posterURLString];
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-    [self.posterView setImageWithURL:posterURL];
-    self.posterView.alpha = 0;
-    [UIView animateWithDuration:.3 animations:^{
-    self.posterView.alpha = 1.0;
-           }];
+    NSURL *posterURLSmall = [NSURL URLWithString:fullPosterURLStringSmall];
+//    [self.posterView setImageWithURL:posterURL];
+//    self.posterView.alpha = 0;
+//    [UIView animateWithDuration:.3 animations:^{
+//    self.posterView.alpha = 1.0;
+//           }];
+    
+    
+    NSURLRequest *requestSmallPoster = [NSURLRequest requestWithURL:posterURLSmall];
+    NSURLRequest *reqestLargePoster = [NSURLRequest requestWithURL:posterURL];
+    
+    __weak DetailsViewController *weakSelf = self;
+    
+    [self.posterView setImageWithURLRequest:requestSmallPoster placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+        // smallImageResponse will be nil if the smallImage is already available
+        // in cache (might want to do something smarter in that case).
+        weakSelf.posterView.alpha = 0.0;
+        weakSelf.posterView.image = smallImage;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.posterView.alpha = 1.0;
+        } completion: ^(BOOL finished) {
+            // The AFNetworking ImageView Category only allows one request to be sent at a time
+            // per ImageView. This code must be in the completion block.
+            [weakSelf.posterView setImageWithURLRequest:reqestLargePoster placeholderImage:smallImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *largeImage) {
+                weakSelf.posterView.image = largeImage;
+            }
+                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                // do something for the failure condition of the large image request
+                // possibly setting the ImageView's image to a default image
+                
+            }];
+        }];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+        // do something for the failure condition
+        // possibly try to get the large image
+    }];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
     if (backdropURLString == (id) [NSNull null]) {
         backdropURLString = posterURLString;
     }
     NSString *fullBackdropURLString = [baseURLString stringByAppendingString:backdropURLString];
+    NSString *fullBackdropURLStringSmall = [baseURLStringSmall stringByAppendingString:backdropURLString];
     
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];
-    [self.backdropView setImageWithURL:backdropURL];
-    self.backdropView.alpha = 0;
-    [UIView animateWithDuration: .9 animations:^{
-    self.backdropView.alpha = 1.0;
-           }];
+    NSURL *backdropURLSmall = [NSURL URLWithString:fullBackdropURLStringSmall];
+//    [self.backdropView setImageWithURL:backdropURL];
+//    self.backdropView.alpha = 0;
+//    [UIView animateWithDuration: .9 animations:^{
+//    self.backdropView.alpha = 1.0;
+//           }];
+    
+    NSURLRequest *requestSmallBackdrop = [NSURLRequest requestWithURL:backdropURLSmall];
+    NSURLRequest *reqestLargeBackdrop = [NSURLRequest requestWithURL:backdropURL];
+
+    [self.backdropView setImageWithURLRequest:requestSmallBackdrop placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+        // smallImageResponse will be nil if the smallImage is already available
+        // in cache (might want to do something smarter in that case).
+        weakSelf.backdropView.alpha = 0.0;
+        weakSelf.backdropView.image = smallImage;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.backdropView.alpha = 1.0;
+        } completion: ^(BOOL finished) {
+            // The AFNetworking ImageView Category only allows one request to be sent at a time
+            // per ImageView. This code must be in the completion block.
+            [weakSelf.backdropView setImageWithURLRequest:reqestLargeBackdrop placeholderImage:smallImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *largeImage) {
+                weakSelf.backdropView.image = largeImage;
+            }
+                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                // do something for the failure condition of the large image request
+                // possibly setting the ImageView's image to a default image
+                
+            }];
+        }];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+        // do something for the failure condition
+        // possibly try to get the large image
+    }];
+    
     
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"overview"];
