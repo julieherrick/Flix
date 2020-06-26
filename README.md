@@ -2,7 +2,7 @@
 
 Flix is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -33,20 +33,22 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. I would like to discuss how they implemented search bars. I struggled to add one to mine.
+2. How people completed viewing the large movie poster by tapping on the cell. I am interested to see what methods other pwople took.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/tTSsQHgGcJ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/emSuEIb3qp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/emSuEIb3qp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+GIF created with [Recordit](https://recordit.co/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I was trying to add a search bar to my app but it is not something I ended up having the time to do. I enjoyed getting to explore using table and collection view and see how different operations effect each of them.
 
 ## Credits
 
