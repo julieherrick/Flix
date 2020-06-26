@@ -44,43 +44,43 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           if (error != nil) {
-               NSLog(@"%@", [error localizedDescription]);
-              
-               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies" message:@"The internet connection appears to be offline" preferredStyle:(UIAlertControllerStyleAlert)];
-               
-               // create a try again action
-               UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) { }];
-               [alert addAction:tryAgainAction];
-               
-               [self presentViewController:alert animated:YES completion:^{ }];
-               
-           }
-           else {
-               NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
-               // TODO: Get the array of movies
-               self.movies = dataDictionary[@"results"];
-
-               
-               [self.tableView reloadData];
-               // TODO: Store the movies in a property to use elsewhere
-               // TODO: Reload your table view data
-           }
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies" message:@"The internet connection appears to be offline" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            // create a try again action
+            UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) { }];
+            [alert addAction:tryAgainAction];
+            
+            [self presentViewController:alert animated:YES completion:^{ }];
+            
+        }
+        else {
+            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            // TODO: Get the array of movies
+            self.movies = dataDictionary[@"results"];
+            
+            
+            [self.tableView reloadData];
+            // TODO: Store the movies in a property to use elsewhere
+            // TODO: Reload your table view data
+        }
         [self.refreshControl endRefreshing];
-       }];
+    }];
     [task resume];
     [self.activityIndicator stopAnimating];
 }
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection:
-    (NSInteger)section {
+(NSInteger)section {
     return self.movies.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-
+    
     NSDictionary *movie = self.movies[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
@@ -88,13 +88,13 @@
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = movie[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
-  
+    
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL: posterURL];
-
     
-   
+    
+    
     return cell;
 }
 
