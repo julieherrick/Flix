@@ -14,7 +14,7 @@ The following **required** functionality is complete:
 - [x] User sees a loading state while waiting for the movies API.
 - [x] User can pull to refresh the movie list.
 - [x] User sees an error message when there's a networking error.
-- [ ] User can tap a tab bar button to view a grid layout of Movie Posters using a CollectionView.
+- [x] User can tap a tab bar button to view a grid layout of Movie Posters using a CollectionView.
 
 The following **optional** features are implemented:
 
