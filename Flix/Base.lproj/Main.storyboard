@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="XQ0-aT-BfZ"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="XQ0-aT-BfZ"/>
                     <connections>
                         <outlet property="activityIndicator" destination="Qks-1s-m3l" id="tf1-Y5-COX"/>
                         <outlet property="tableView" destination="iad-lb-N0N" id="SUn-x9-TGm"/>
@@ -156,9 +156,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOX-2N-9Pn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="943" y="890"/>
+            <point key="canvasLocation" x="942.02898550724649" y="889.95535714285711"/>
         </scene>
-        <!--Movies Grid View Controller-->
+        <!--Upcoming-->
         <scene sceneID="Nec-i4-PVR">
             <objects>
                 <viewController id="OGi-EC-KsF" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -169,7 +169,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V62-hp-aAh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="k9h-E7-rWi">
                                     <size key="itemSize" width="200" height="300"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -201,7 +201,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="FUH-4E-FNS"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kSN-Gs-E10"/>
+                    <navigationItem key="navigationItem" title="Upcoming" id="kSN-Gs-E10"/>
                     <connections>
                         <outlet property="collectionView" destination="V62-hp-aAh" id="Kv9-od-b3j"/>
                     </connections>
@@ -210,11 +210,26 @@
             </objects>
             <point key="canvasLocation" x="2315.9420289855075" y="889.95535714285711"/>
         </scene>
-        <!--Item-->
+        <!--View Controller-->
+        <scene sceneID="XZy-kC-B1P">
+            <objects>
+                <viewController id="cK9-4T-Hiy" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3o-H3-Bcy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="wxA-8F-PBZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLw-iN-T55" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3390" y="890"/>
+        </scene>
+        <!--Now Playing-->
         <scene sceneID="7Db-z8-A53">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="02a-v8-Xdl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="8te-bO-cKK"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="projector_tabbar_item" id="8te-bO-cKK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hV5-wa-67I">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -233,7 +248,7 @@
         <scene sceneID="CTt-rU-V6S">
             <objects>
                 <navigationController title="Now Playing" id="eFo-Lu-sae" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7oN-nY-JUI"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="reel_tabbar_icon" id="7oN-nY-JUI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9OZ-6e-WgH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -247,4 +262,8 @@
             <point key="canvasLocation" x="2316" y="138"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="projector_tabbar_item" width="21" height="25"/>
+        <image name="reel_tabbar_icon" width="25" height="25"/>
+    </resources>
 </document>
